@@ -13,7 +13,6 @@ const images = [
   },
 ];
 
-
 const collectionEl = document.querySelector('#gallery')
   collectionEl.style.listStyle = 'none'
   collectionEl.style.display = 'grid'
@@ -21,19 +20,22 @@ const collectionEl = document.querySelector('#gallery')
   collectionEl.style.gridColumnGap = '50px'
 
 
-const elements = images.map(attribute => {
-  const itemEl = document.createElement('li')
-  const imageEl = document.createElement('img')
-    imageEl.src = attribute.url
-    imageEl.alt = attribute.alt
+const createElementsOfGallery = options => {
+  return options.map(option => {
+    const itemEl = document.createElement('li')
+    const imageEl = document.createElement('img')
+    imageEl.src = option.url
+    imageEl.alt = option.alt
     imageEl.width = '400'
   
-  itemEl.append(imageEl)
+    itemEl.append(imageEl)
 
+    return itemEl
+  })
+}
 
-
-  return itemEl
-
-})
-
+const elements = createElementsOfGallery(images)
 collectionEl.append(...elements)
+
+
+
