@@ -20,22 +20,44 @@ const collectionEl = document.querySelector('#gallery')
   collectionEl.style.gridColumnGap = '50px'
 
 
-const createElementsOfGallery = options => {
-  return options.map(option => {
-    const itemEl = document.createElement('li')
-    const imageEl = document.createElement('img')
-    imageEl.src = option.url
-    imageEl.alt = option.alt
-    imageEl.width = '400'
-  
-    itemEl.append(imageEl)
+//................ ВАРИАНТ "А" (templating и свойство insertAdjacentHTML)................ 
 
-    return itemEl
-  })
+const makeCollectionMarkup = attributes => {
+  const { url, alt } = attributes
+  return `
+    <li>
+      <img src="${url}" alt="${alt}" width="400">
+    </li>
+  `
 }
 
-const elements = createElementsOfGallery(images)
-collectionEl.append(...elements)
+const items = images.map(makeCollectionMarkup).join(' ')
+
+collectionEl.insertAdjacentHTML(
+  'beforeend',
+  items
+)
+
+//................ ВАРИАНТ "Б" (через свойства createElement и append)................ 
+
+// const createElementsOfGallery = options => {
+//   return options.map(option => {
+
+
+//     const itemEl = document.createElement('li')
+//     const imageEl = document.createElement('img')
+//     imageEl.src = option.url
+//     imageEl.alt = option.alt
+//     imageEl.width = '400'
+  
+//     itemEl.append(imageEl)
+
+//     return itemEl
+//   })
+// }
+
+// const elements = createElementsOfGallery(images)
+// collectionEl.append(...elements)
 
 
 
